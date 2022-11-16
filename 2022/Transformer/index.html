@@ -1,0 +1,810 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Transformer | 梁止潆的博客</title><meta name="keywords" content="Transformer,AI,Paper"><meta name="author" content="Joyce"><meta name="copyright" content="Joyce"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Transformer Title: Attention Is All You Need Authors: Vaswani, Ashish DOI: https:&#x2F;&#x2F;doi.org&#x2F;10.48550&#x2F;arXiv.1706.03762 Date: October 1, 2022 Finish time: 2022&#x2F;10&#x2F;07 Future: 应用于别的任务上面，图片语音视频，生物信息学 Meanin">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Transformer">
+<meta property="og:url" content="http://joyceliang.club/2022/Transformer/index.html">
+<meta property="og:site_name" content="梁止潆的博客">
+<meta property="og:description" content="Transformer Title: Attention Is All You Need Authors: Vaswani, Ashish DOI: https:&#x2F;&#x2F;doi.org&#x2F;10.48550&#x2F;arXiv.1706.03762 Date: October 1, 2022 Finish time: 2022&#x2F;10&#x2F;07 Future: 应用于别的任务上面，图片语音视频，生物信息学 Meanin">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://img.peterli.club/joy/202210181341253.png">
+<meta property="article:published_time" content="2022-10-14T01:46:49.000Z">
+<meta property="article:modified_time" content="2022-10-18T13:40:14.546Z">
+<meta property="article:author" content="Joyce">
+<meta property="article:tag" content="Transformer">
+<meta property="article:tag" content="AI">
+<meta property="article:tag" content="Paper">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://img.peterli.club/joy/202210181341253.png"><link rel="shortcut icon" href="http://img.peterli.club/joy/202210141514731.jpeg"><link rel="canonical" href="http://joyceliang.club/2022/Transformer/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="baidu-site-verification" content="code-c9hz390Wld"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://unpkg.com/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?e50dee5804918429b74a301c425729fe";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.json","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://unpkg.com/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://unpkg.com/flickr-justified-gallery/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Transformer',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-10-18 21:40:14'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="http://img.peterli.club/joy/202210141514731.jpeg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">43</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/paper/"><i class="fa-fw fas fa-duotone fa-newspaper"></i><span> Paper</span></a></li><li><a class="site-page child" href="/bioinformatics/"><i class="fa-fw fas fa-regular fa-dna"></i><span> BioInformatics</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('http://img.peterli.club/joy/202210181341253.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">梁止潆的博客</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/paper/"><i class="fa-fw fas fa-duotone fa-newspaper"></i><span> Paper</span></a></li><li><a class="site-page child" href="/bioinformatics/"><i class="fa-fw fas fa-regular fa-dna"></i><span> BioInformatics</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Transformer</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-10-14T01:46:49.000Z" title="发表于 2022-10-14 09:46:49">2022-10-14</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-10-18T13:40:14.546Z" title="更新于 2022-10-18 21:40:14">2022-10-18</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Paper/">Paper</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Paper/Transformer/">Transformer</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Transformer"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1>Transformer</h1>
+<p>Title: Attention Is All You Need</p>
+<p>Authors: Vaswani, Ashish</p>
+<p>DOI: <a target="_blank" rel="noopener" href="https://doi.org/10.48550/arXiv.1706.03762">https://doi.org/10.48550/arXiv.1706.03762</a></p>
+<p>Date: October 1, 2022</p>
+<p>Finish time: 2022/10/07</p>
+<p>Future: 应用于别的任务上面，图片语音视频，生物信息学</p>
+<p>Meaning: 舍去了特征提取这一步，只关于注意力机制，训练速度更快效果更好</p>
+<p>Year: 2017</p>
+<p>关键词: AI, NLP</p>
+<p>期刊杂志: NIPS2017</p>
+<p>Reference: 【Transformer论文逐段精读【论文精读】】<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1pu411o7BE?vd_source=5ec85dfc5468a21a485b1b1d4d271219">https://www.bilibili.com/video/BV1pu411o7BE?vd_source=5ec85dfc5468a21a485b1b1d4d271219</a></p>
+<h1>标题+作者</h1>
+<h2 id="Attention-Is-All-You-Need">Attention Is All You Need</h2>
+<blockquote>
+<p>经验：每个作者名字后面都打了一个🌟号（行内打🌟一般都表示同等贡献，listing oder is random，每个作者都做出了贡献</p>
+</blockquote>
+<p><img src="http://img.peterli.club/joy/202210141048133.png" alt="Untitled"></p>
+<h1>摘要(Abstract)</h1>
+<ul>
+<li>序列转录模型：给你一个序列，你生成另外一个序列，这样的模型主要是依赖于比较复杂的循环或者卷积神经网络，它一般是用一个叫做encoder和decoder的架构</li>
+<li>性能比较好的模型一般都会在编码器和解码器之间使用一个叫做注意力机制的东西</li>
+<li>这篇文章提供了一个简单的网络架构（只要结果好），仅仅是依赖于注意力机制，而没有用之前的循环或者是卷积</li>
+<li>做了两个机器翻译的实验，显示这个模型在性能上特别好，可以并行度更好，需要更少的时间来训练，达到了28.4 BLEU——机器翻译中的一个衡量标准，英语到德语好了2个BLEU，英语到法语做了一个单模型，比所有模型效果好，只在8个GPU上训练了3.5天，模型在泛化效果也好</li>
+</ul>
+<img src="http://img.peterli.club/joy/202210141049748.png" alt="abstract" style="zoom:50%;" />
+<h1>结论(Conclusion)</h1>
+<ul>
+<li>
+<p>提出了什么东西跟别人的区别</p>
+<p>我们介绍了Transformer这个模型，这是第一个做序列转录的模型，仅仅使用注意力，把之前所有的循环程全部换成了multi-head self-attention，基本上可以看到这篇文章主要用的是提出了是这样一个层</p>
+</li>
+<li>
+<p>效果和别人相比怎么样</p>
+<p>在机器翻译这个任务上面，Transformer能够训练的比其他的架构都要快很多，而且在实际的结果上确实是效果比较好</p>
+</li>
+<li>
+<p>未来期望的发展</p>
+<p>想把这种纯注意力机制的模型用在别的任务上面，除了文本以外包括图片、语音、video等，使得生成不那么时序化</p>
+</li>
+<li>
+<p>代码放在<a target="_blank" rel="noopener" href="https://github.com/tensorflow/tensor2tensor">tensor2tensor</a></p>
+</li>
+</ul>
+<img src="http://img.peterli.club/joy/202210141049582.png" alt="conclusion" style="zoom: 50%;" />
+<h1>导言(Introduction)</h1>
+<p>前面摘要的一半的一个扩充</p>
+<ul>
+<li>
+<p>当前的行内用的最多的东西</p>
+<p>在时序模型里面，当前(2022)常用的是RNN，2017最常用的是LSTM(long short-term memory)、GRU，在这里有两个比较主流的模型，一个是语言模型，另一个是当输出结构化信息比较多的时候，会用一个叫做编码器和解码器的架构</p>
+</li>
+<li>
+<p>RNN优点和缺点</p>
+<ul>
+<li>
+<p>RNN是什么</p>
+<p>RNN里面，给你一个序列的话，它的计算是把这个序列从左往右移一步一步往前做，一个句子的话就是一个词一个词往前看，对第t个词，它会计算一个输出叫做$h_t$，也叫做隐藏状态</p>
+<p>$h_t$是由前面一个词的隐藏状态叫$h_{t-1}$和当前第t个词本身决定的，这样可以把前面学到的历史信息通过$h_{t-1}$放到当下，和当前的词做一些计算，然后得到输出</p>
+<p>这也是RNN如何能够有效处理时序信息的一个关键之处，他把之前的信息全部放在隐藏状态里面，一个个放在里面，但是这也导致了问题</p>
+</li>
+<li>
+<p>缺点</p>
+<ul>
+<li>计算性能较差，它是一个时序，就是一步一步计算的过程，难并行，计算上性能较差</li>
+<li>内存消耗大，历史信息一步一步往后传递，如果时序比较长的话，在很早期的时序信息，在后面的时候可能会丢掉，不想丢掉的话，$h_t$比较大，每个$h_t$都存下来的话，内存消耗大</li>
+</ul>
+<p>很多人做了很多改进，包括提升并行度，但是本质上还是没有解决太多问题</p>
+</li>
+</ul>
+</li>
+<li>
+<p>attention在RNN中的应用</p>
+<p>在Transformer之前，attention已经被成功地用在编码器的解码器里面了，主要是用在怎么样把编码器的东西很有效的传给解码器，attention跟RNN一起使用</p>
+</li>
+<li>
+<p>提出Transformer，不再使用之前被大家使用的循环神经层了，而是使用纯注意力机制，而且是可以并行的，之前时序神经网络要按时序地做运算，换成attention之后可以完全做并行，速度快了</p>
+</li>
+</ul>
+<img src="http://img.peterli.club/joy/202210141050248.png" alt="introduction-1" style="zoom:50%;" />
+<img src="http://img.peterli.club/joy/202210141050030.png" alt="introduction-2" style="zoom:50%;" />
+<h1>相关工作(Background)</h1>
+<blockquote>
+<p>经验：关键是要讲清楚跟你论文相关的那些论文是谁，跟你的联系是什么，你跟他们的区别是什么</p>
+</blockquote>
+<ul>
+<li>
+<p>卷积神经网络的参考价值</p>
+<p>如何使用卷积神经网络来替换掉循环神经网络，使得减少时序的计算</p>
+<ul>
+<li>
+<p>缺点</p>
+<p>对于比较长的序列使用卷积神经网络难以建模，这是因为卷积做计算的时候每一次它去看一个一个比较小的一个窗口</p>
+<p>比如看一个3x3的像素块，如果两个像素隔得比较远的话，需要很多层卷积，一层一层上去，才能够最后把这两个隔得远的像素融合起来</p>
+<p>但是如果使用Transformer里面的注意力机制的话，每一次能看到所有的像素，一层就能够把整个序列看到，相对来说就没有这个问题</p>
+</li>
+<li>
+<p>优点</p>
+<p>可以做多个输出通道，一个输出通道可以认为是它可以去识别不一样的模式</p>
+</li>
+</ul>
+<p>作者说想要注意力机制也想要这样子的多输出通道的效果，所以它提出了一个叫做Muti-Headed Attention，可以模拟卷积神经网络多输出通道的一个效果</p>
+</li>
+<li>
+<p>介绍自注意力机制，这是Transformer里面一个关键性的点，其中提到这个工作之前已经有人提出来了，并不是我这个工作的创新</p>
+<p>自注意力将单个序列的不同位置联系起来，来计算出序列的表示</p>
+</li>
+<li>
+<p>提到memory networks，这个在17年的时候算是一个研究的重点</p>
+</li>
+<li>
+<p>best knowledge 里面，我们的Transformer是第一个只依赖于自注意力来做这种encode到decode的架构的模型</p>
+</li>
+</ul>
+<img src="http://img.peterli.club/joy/202210141050281.png" alt="background" style="zoom:50%;" />
+<h1>✨模型架构(Model Architecture)</h1>
+<ul>
+<li>
+<p>这些序列模型里面现在比较好的是一个叫做编码器和解码器的架构，然后解释了一下什么是编码器什么是解码器</p>
+<ul>
+<li>
+<p>编码器</p>
+<p>将一个输入的符号表示序列($x_1$,$x_2$…$x_n$)即一个长为n的$x_1$一直到$x_n$的东西，映射到连续表示序列$z=(z_1,z_2,…z_n)$</p>
+<p>假设一个句子的话，有n个词的话，$x_t$就表示第t个词，编码器会把这个序列表示一个也是长为n，但是每一个$z_t$对应的是$x_t$的一个向量的表示，$z_t$就表示第t个词的一个向量的表示，这就是编码器的输出</p>
+<p>原始的输入变成机器学习可以理解的一系列的向量</p>
+</li>
+<li>
+<p>解码器</p>
+<p>拿到编码器的输出，会生成一个长为m的输出序列$(y_1,…,y_m)$，跟编码器不一样的是，在解码器里面这个词是一个一个生成的</p>
+<p>因为对于编码器来讲，很有可能是一次性能看全整个句子，但是解码器里面只能一个一个生成，这就是自回归，叫做auto-regressive的一个模型，在这个里面你的输入又是你的输出</p>
+</li>
+</ul>
+<p>在最开始给定z，那么你要去生成第一个输出叫做$y_1$，拿到$y_1$之后就可以去生成$y_2$，一般来说要生成$y_t$的话，可以把之前所有的$y_1$到$y_{t-1}$全部拿到，也就是过去时刻的输出也会作为你当前时刻的输入，所以这个叫做自回归</p>
+<p><img src="http://img.peterli.club/joy/202210141051159.png" alt="model-1"></p>
+</li>
+<li>
+<p>Transformer是使用了一个编码器解码器的架构，具体来说它是将一些自注意力和point-wise，full-connected layers，然后把一个一个堆在一起的，下面统一展示这个架构</p>
+<p>解码器在做预测的时候是没有输入的，实际上它就是解码器在之前时刻的一些输出作为输入在这个地方</p>
+<p><img src="http://img.peterli.club/joy/202210141051059.png" alt="model-2"></p>
+<blockquote>
+<p>经验：写论文的时候有一张能够把整个全局画清楚的图是非常重要的，神经网络年代，画图是一个基础的技能</p>
+</blockquote>
+<img src="http://img.peterli.club/joy/202210141051925.jpg" alt="model-3" style="zoom: 25%;" />
+</li>
+</ul>
+<h2 id="具体介绍">具体介绍</h2>
+<h2 id="Encoder-and-Decoder-Stacks">Encoder and Decoder Stacks</h2>
+<ul>
+<li>
+<p>编码器(Encoder)</p>
+<ul>
+<li>
+<p>结构</p>
+<ul>
+<li>
+<p>编码器是一个N=6个完全一样的layer组成的block</p>
+</li>
+<li>
+<p>每个layer里面有两个sub-layer</p>
+<p>第一个sub-layer叫做multi-head self-attention</p>
+<p>第二个sub-layer叫做position-wise fully connected feed-forward network(说白了就是一个MLP，显得fancy一点就写的长一点)。</p>
+</li>
+<li>
+<p>对每一个sub-layer用了一个残差连接，最后再使用layer normalization</p>
+</li>
+<li>
+<p>这个sub-layer的公式为LayerNorm($x$ + Sublayer($x$))</p>
+</li>
+</ul>
+</li>
+<li>
+<p>流程</p>
+<p>输入$x$进来，先进入子层，因为是残差连接，就把输入和输出加在一起，最后进入LayerNorm</p>
+</li>
+<li>
+<p>维度</p>
+<p>因为残差连接需要输入和输出是一样大小，如果不一样的话要做投影，为了简单起见，就把每一个层的输出的维度变成512，也就是说对每一个词，不管在哪一层都做了这个512长度的表示</p>
+<p>跟CNN不一样，之前做MLP的时候经常维度要么是往下减，要么CNN的话是空间维度往下减，channel维度往上拉，但是这里就是固定长度来表示，使得这个模型相对来说是比较简单的，调参也只是调一个而已，另一个参就是有几个block</p>
+</li>
+</ul>
+<blockquote>
+<p>经验：用了别人的东西，最好在文章里真的讲一下它是什么东西，不能指望别人都知道所有的细节，能够花几句话讲清楚是不错的，不然还要别人去点开链接看到底是什么东西给大家带来了困难</p>
+</blockquote>
+<ul>
+<li>
+<p>补充：LayerNorm</p>
+<p>用与batchnorm作对比来解释layernorm是什么以及为什么在变长的应用里面不使用batchnorm</p>
+<ul>
+<li>
+<p>二维情况</p>
+<ul>
+<li>
+<p>batchnorm</p>
+<ul>
+<li>
+<p>干了什么？</p>
+<p>输入一个矩阵，每一行是一个样本，每一列是一个特征，把每一个<strong>特征</strong>在一个小mini-batch里面，均值变成0，方差变成1</p>
+</li>
+<li>
+<p>怎么实现？</p>
+<p>把它的这个向量本身的均值减掉，然后再除以它的方差，算均值，就是在每一个小批量里面，就这条向量里面算出它的一个均值和方差。</p>
+</li>
+<li>
+<p>训练和预测时的差别</p>
+<p>在训练的时候，可以用小批量，但是在预测的时候，是算全局的均值，整个数据扫一遍之后，在所有数据上那些平均的那个均值方差存起来，预测的时候使用</p>
+<p>batchnorm还会去学一个λ、β，就是说可以把这个向量通过学习放成一个任意方差为某个值，均值为某个值的东西</p>
+</li>
+</ul>
+</li>
+<li>
+<p>layernorm</p>
+<p>跟batchnorm很多时候是几乎是一样的，除了他做的方法不一样，layernorm干的事情就是对每个<strong>样本</strong>做了normalization，而不是对特征做，之前是把每一个列的均值变成0方差变成1，现在是把每一个行的均值变成0方差变成1</p>
+<p>就是相当于这个layernorm整个把数据转置一下放到batchnorm里面出来的结果再转置回去一下基本上就可以得到自己的东西了</p>
+</li>
+</ul>
+<img src="http://img.peterli.club/joy/202210141051311.png" alt="encoder-1" style="zoom:33%;" />
+</li>
+<li>
+<p>三维情况</p>
+<p>但是在Transformer或者RNN里面，输入是一个三维的东西，因为它输的是一个序列的样本，就是每一个样本其实是里面有很多个元素，它是一个序列，一个句子里面有n个词，所以每个词有个向量的话，还有一个batch的话就是个3D的东西，列不再是特征了，列变成了序列的长度，写成sequence，然后对每一个sequence就是对每个词有自己的向量</p>
+<ul>
+<li>
+<p>batchnorm(蓝色)：</p>
+<p>每次是取一根特征，然后把它的每个样本里面所有的元素，这整个序列里的元素以及它的整个batch全部搞出来，把它的均值变成0，方差变成1，纵向切一块出来拉成一个向量，然后跟之前做一样的运算</p>
+</li>
+<li>
+<p>layernorm(黄色)，就是对每个样本，那样做</p>
+</li>
+<li>
+<p>为什么用layernorm多一点</p>
+<p>因为在持续的序列模型里面，每个样本的长度可能会发生变化</p>
+<p>batchnorm在长度变化比较大的时候，每次做小批量的时候，算出来的均值方差抖动相对来说比较大，做预测的时候是要把全局的均值和方差记录下来，那么这个全局的均值方差，如果遇到一个新的预测样本，特别特别长的东西，那是不是在训练的时候没见过伸出去那么多的，那之前算的均值和方差就可能没那么好用</p>
+<p>对于layernorm相对来说没有太多这个问题，是因为它是每个样本自己来算均值和方差，也不需要存在一个全局的一个均值方差，所以相对来说，不管样本是长是短，反正算均值是在自己里面算的，相对来说稳定一点</p>
+</li>
+</ul>
+<img src="http://img.peterli.club/joy/202210141051515.png" alt="encoder-2" style="zoom:33%;" />
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>解码器(decoder)</p>
+<ul>
+<li>
+<p>结构</p>
+<ul>
+<li>解码器也是一个N=6个完全一样的layer组成的block</li>
+<li>每个layer里面有两个跟编码器一样的sub-layer，与编码器不一样的是，解码器里面用了一个第三个sub-layer，同样是一个多头的注意力机制</li>
+<li>跟编码器一样同样的用了残差连接和layernorm</li>
+</ul>
+</li>
+<li>
+<p>自回归</p>
+<p>解码器做的是一个自回归，当前输出的输入集是上面一些时刻的输出，意味着你在预测的时候不能看到之后的那些时刻的输出，但是在注意力机制里面每一次能看到整个完整的输入</p>
+<p>为了避免这个事情的发生，在解码器训练的时候，在预测第t个时刻的输出的时候不应该看到t时刻以后的那些输入，做法是通过一个带掩码的注意力机制，保证输入进来的时候，在t时刻是不会看到t时刻以后的那些输入，从而保证训练和预测的时候行为是一致的</p>
+</li>
+</ul>
+</li>
+</ul>
+<img src="http://img.peterli.club/joy/202210141052559.png" alt="decoder-1" style="zoom:50%;" />
+<h2 id="Attention">Attention</h2>
+<p>对注意力层的一般化的介绍，注意力函数是一个将一个query和一些keys-values pairs映射成一个输出的一个函数，这里的query、keys、values、output都是一些向量</p>
+<ul>
+<li>
+<p>output</p>
+<p>values的一个加权和，所以输出的维度跟value的维度是一样的</p>
+</li>
+<li>
+<p>weight</p>
+<p>每一个value的权重，它是这个value对应的key和这个查询的query的相似度算来的或者叫做compatibility function</p>
+</li>
+<li>
+<p>不同的注意力机制有不同的算法</p>
+<p>假设有三个value和三个对应的key，输出是这三个v的相加，假设给一个query，这个query跟第一第二个key比较近(黄)，前两个的权重会大点，第三个权重会小一点，因为这个权重是等价于你的query和你对应的key的那个相似度</p>
+<p>假设再给一个query，但是它是跟最后那一个key比较像的话(绿)，再去算v的话就会发现它对后面的权重会比较高一点，中间权重还不错，最后权重小一点，会得到新的输出。虽然key value没有变，但是随着query的改变，因为权重分配不一样，导致你的输出会有不一样，这就是注意力机制</p>
+</li>
+</ul>
+<img src="http://img.peterli.club/joy/202210141052252.png" alt="attention-1" style="zoom:33%;" />
+<img src="http://img.peterli.club/joy/202210141052333.png" alt="attention-2" style="zoom:50%;" />
+<h3 id="Scaled-Dot-Product-Attention">Scaled Dot-Product Attention</h3>
+<p>因为不同的相似函数导致不一样的注意力的版本，接下来介绍Transformer自己用到的这一个注意力Scaled Dot-Product Attention是什么样子计算的，最简单的注意力机制</p>
+<ul>
+<li>
+<p>计算方法</p>
+<ul>
+<li>query和key是等长的，都等于$d_k$(可以不等长，不等长的话可以用别的方法算)，它的value是$d_v$，输出一样也是$d_v$</li>
+<li>对每一个query和key做内积作为相似度，如果这两个向量的norm是一样的话，那么你的内积的值越大，就是它的余弦值，就表示这两个向量的相似度就越高，如果内积等于0了，那就等于是两个向量是正交的，就是没有相似度</li>
+<li>算出来之后，再除以$\sqrt{d_k}$即向量的长度，然后再用一个softmax来得到values的权重</li>
+<li>因为给一个query，假设给n个key-value pair的话，那么就会算出n个值，因为这个query会跟每个key做内积，算出来之后再放进softmax就会得到n个非负的而且加起来和等于1的一个权重，对于权重我们觉得当然是非负加起来等于1就是比较好的权重，然后我们把这些权重作用在我们的value上面就会得到我们的输出了，我们不能一个一个这么做运算，算起来比较慢</li>
+</ul>
+</li>
+<li>
+<p>实际计算</p>
+<ol>
+<li>
+<p>query矩阵与key矩阵相乘</p>
+<p>query写成一个矩阵，n个query即n行，维度为$d_k$（query个数和key value的个数可能是不一样的，但是长度一定是一样的，这样子才能做内积），query矩阵与key矩阵相乘得到了n*m的一个矩阵</p>
+</li>
+<li>
+<p>得到weight权重</p>
+<p>n*m矩阵每一行蓝色的线就是一个query对所有key的内积值，再除以$\sqrt{d_k}$，再做softmax（对每一行做softmax），然后每行之间是独立的，就能得到权重</p>
+</li>
+<li>
+<p>得到output输出</p>
+<p>weight乘以v，v是一个m行，列数是dv的矩阵，两个矩阵相乘得到一个n乘以dv的矩阵，这个矩阵每一行就是output输出</p>
+</li>
+</ol>
+<p>所以对于key-value pair和n个query的话，可以通过两次矩阵乘法来把整个计算做掉，这些query、key、value在实际中对应的就是序列，所以导致基本上可以并行计算里面每个元素，因为矩阵乘法是一个非常好并行的东西</p>
+<img src="http://img.peterli.club/joy/202210141052029.png" alt="scaled-1" style="zoom: 33%;" />
+</li>
+<li>
+<p>我的注意力机制和别人的区别</p>
+<p>一般有两种比较常见的注意力机制，一种叫做加型的注意力机制，可以处理query和key不等长的情况，另一种叫做点积的注意力机制，他说点积的注意力跟我的机制是一样的，因为这个实现起来比较简单并有效</p>
+</li>
+<li>
+<p>为什么要除以$\sqrt{d_k}$</p>
+<p>如果$d_k$小的话除不除以都没关系，两种机制都差不多</p>
+<p>但是$d_k$比较大的话，即两个向量长度比较长的时候，你做点积的时候这些值可能就会比较大，但也可能比较小了，当你的值比较大的时候，你之间的相对的那些差距就会变大，就导致说你值最大的那一个值做出来softmax就会更加靠近于1，剩下的那些值就会更加靠近于0，你的值就会更加向两端靠拢</p>
+<p>当你出现这样子的情况的时候，你算梯度的时候，你会发现梯度比较小，因为softmax最后的结果就是我希望我的预测值置信的地方尽量靠近1，不置信的地方尽量靠近0，这样子的时候就是收敛的差不多了，这个时候梯度就是比较小，就会跑不动</p>
+<p>为了抵消这种影响，用$\frac{1}{\sqrt{d_k}}$来缩放点积，所以说Transformer里的$d_k$会比较大</p>
+</li>
+</ul>
+<img src="http://img.peterli.club/joy/202210141053603.png" alt="scaled-2" style="zoom: 50%;" />
+<ul>
+<li>怎么样做mask?
+<ul>
+<li>
+<p>mask作用</p>
+<p>为了避免你在第t时间的时候看到以后时间的东西</p>
+</li>
+<li>
+<p>为什么要用mask?</p>
+<p>假设query和key是等长的，长度都为n，而且在时间上是能对应起来的，然后对第t时刻的$Q_t$即query，在计算的时候，应该只是看$k_1$到$k_{t-1}$，不应该看$k_t$和它之后的东西，因为$k_t$在当前时刻还没有，但是在注意力机制的时候，$Q_t$会跟所有$k$里面的东西全部做运算，就是$k_t$一直算到$k_n$，算还是可以算的，在算出来之后只要保证说在计算权重的时候，就是算输出的时候，不要用到后面的一些东西就行了。就是加一个mask</p>
+</li>
+<li>
+<p>怎么样做mask?</p>
+<p>mask意思是说对于$Q_t$和$k_t$和它之后的计算那些值换成一个很大很大的负数，那这么大一个负数进入softmax做指数的时候，他就会变成0，所以导致softmax之后出来的这些东西它对应的那些权重都会变成0，而只会前面那些值有效果</p>
+<p>这样在算我的output的时候，只用上了$v_1$一直到$v_{t-1}$的结果，而后面的东西我没有看。所以这个mask效果是在训练的时候，让t个时间的query只看对应的前面那一些的key-value pair，使得我在做预测的时候，我跟现在这个是能够一一对应上</p>
+</li>
+</ul>
+</li>
+</ul>
+<img src="http://img.peterli.club/joy/202210141053030.png" alt="scaled-3" style="zoom: 50%;" />
+<h3 id="Multi-Head-Attention">Multi-Head Attention</h3>
+<ul>
+<li>
+<p>怎么做？</p>
+<p>与其做一个单个的注意力函数，不如说把整个query、key、value投影到一个低维，投影h次，然后再做h次的注意力函数，然后把每一个函数的输出并在一起，然后再投影来得到最终的输出。</p>
+<p>进入一个linear线性层，线性层就是把你投影到比较低的维度，然后进入Scaled Dot-Product Attention，做h次，会得到h的输出，把这些输出向量全部合到一起，最后做一次线性的投影</p>
+<div align=center><img src="http://img.peterli.club/joy/202210181434055.png" style="zoom:50%;" />
+</li>
+<li>
+<p>为什么要做？</p>
+<p>回头看Scaled Dot-Product Attention，会发现没有什么参数可以学习，你的具体函数就是你的内积，但有时候为了识别不一样的那些模式，希望可能有一些不一样的计算像素的办法</p>
+<p>如果是用的加型attention，这里没有提到的，那里面其实还是有一个权重可以学习的，那我用这个的多，我先让你投影到低维，这个投影的w是可以学的，也就是说我给你h次机会，希望你能学到不一样的投影的方法，使得在那个投影进去的那个度量空间里面，能够去匹配不同模式它需要的一些相似函数，然后最后把这些东西回来，最后再做一次投影。跟之前说的卷积神经网络有多个输出通道的感觉</p>
+<p>具体公式如下，Q，K，V还是以前那个，但是你的输出已经是你不同的头的那一个输出的做concat起来，再投影到一个$W^O$里面，对每一个头，他就是把你的Q、K、V然后通过一个不同的可以学习的$W^Q$、$W^K$、$W^V$，投影到一个dv上面，再做我们之前提到的注意力函数，然后再出来就行了</p>
+<img src="http://img.peterli.club/joy/202210141054998.png" alt="multi-2" style="zoom:50%;" />
+<p>这里h是8，使用的是8个头，注意力的时候有残差连接的存在，使得你的输入和输出的维度至少是一样的，它的做法是说你投影的时候，它投影的就是你的输出的维度除以h，因为我们之前我的输出维度是512，除以8之后呢，就是每一次我们把它投影到一个64维的一个维度，然后在上面算你的注意力函数，然后再并起来再投影回来</p>
+<p>虽然这个地方看到的是非常多的小矩阵的乘法，实际上在实现的时候也可以通过一次的矩阵乘法来实现</p>
+</li>
+</ul>
+<img src="http://img.peterli.club/joy/202210141054797.png" alt="multi-3" style="zoom:50%;" />
+<img src="http://img.peterli.club/joy/202210141054369.png" alt="multi-4" style="zoom:50%;" />
+<h3 id="Applications-of-Attention-in-our-Model">Applications of Attention in our Model</h3>
+<p>在Transformer这个模型里面是如何使用注意力的，下面为三种使用情况</p>
+<ul>
+<li>
+<p>编码器</p>
+<p>假设你的句子长度是n的话，输入是一个n个长为d的向量，假设我们的$p_n$大小设成了1，每个输入它的词对应的是一个长为d的向量，然后我们这里一共有n个这样的东西</p>
+<p>注意力层有三个输入，分别是key、value、query，图里一根线过来然后复制了三下，同样一个东西既作为key、也作为value和query，所以这个东西叫做自注意力机制，key、value和query其实是一个东西，就是自己本身</p>
+<p>输入了n个query，每个query会拿到一个输出，即有n个输出，而且这个输出和value因为长度是一样的，那么输出的维度其实也是那个d，意味着输入和输出的大小其实是一个东西</p>
+<p>对每个query都会计算一个输出，输出是value的一个加权和，权重是来自于query和key的一些东西，但它本身就是一个东西，意味着这个东西实际上本身就是你的输入的一个加权的一个和，绿色线代表权重的话，因为这个权重本身就是这个向量跟每一个输入的别的向量计算相似度，那么他跟自己算肯定是最大的</p>
+<p>假设我们不考虑多头和有投影的情况，你的输出就是你的输入的一个加权和，你的权重来自于你自己本身跟各个向量之间的一个相似度，但是如果有多头的话，因为有投影，其实我们在这个地方会学习h个不一样的距离空间出来，使得你出来的东西当然是会有一点点不一样了</p>
+<img src="http://img.peterli.club/joy/202210141054763.png" alt="application-1" style="zoom: 33%;" />
+</li>
+<li>
+<p>解码器(Masked Multi-Head Attention)</p>
+<p>解码器输入跟编码器一样也是一个线进来复制三次，只是长度可能是m，维度其实也是一样的，所以跟编码器一样的自注意力，唯一不一样的是这里有masked，意味着在解码器你的这些后面的东西这些权重要设为0，这是mask的作用</p>
+</li>
+<li>
+<p>解码器(Multi-Head Attention)</p>
+<p>这个地方不再是自注意力，key和value来自于编码器的输出，query是来自于解码器下一个attention的输入，编码器最后一层的输出是n个长为d的向量，那么解码器的masked attention就是最下面那个attention的输出是m个也是长为d的向量</p>
+<p>编码器的输出作为key和value进来，然后解码器下一层的输出作为query进来，意味着对解码器的每一个输出作为query，我要算一个我要的输出，那么输出是来自于value的一个加权和，那就是来自于编码器输出的加权和</p>
+<p>意味着在这个attention干的事情，其实就是去有效的把你的编码器里面的一些输出根据我想要的东西把它拎出来</p>
+<p>举个具体的例子，假设你是在做英文翻译中文，假设第一个词是hello，第二个词是hello world的话，那么你的中文他就是第一个当是“你”，“你好”，所以你会知道说在算好的时候，如果它作为query的时候，那么去看hello的这个向量应该是会相近一点，给他比较大的权重，但是world是后面的次相关，我发现到word这个词跟我这个query相关度没那么高，在计算你的相似度的时候，那么就是说在算“好”的时候呢，我会给他一个比较大的权重，但是我在后面如果还有“你好世界”，如果是个“世”的话，那么在这个query的时候，我再去算它的输出这个东西的时候，它那么就会给第二个向量给一个比较大的一个权重出来</p>
+<p>意味着根据你在解码器的时候，你的输入的不一样，那么我会去根据你的当前的那一个向量去在编码器的输出里面去挑我感兴趣的东西，也就是注意到你感兴趣的东西，忽略掉你不感兴趣的东西，这个也是说attention是如何在编码器和解码器之间传递信息的时候起到的一个作用</p>
+</li>
+</ul>
+<img src="http://img.peterli.club/joy/202210141055976.png" alt="application-2" style="zoom: 33%;" />
+<img src="http://img.peterli.club/joy/202210141055338.png" alt="application-3" style="zoom:50%;" />
+<h2 id="Position-wise-Feed-Forward-Networks">Position-wise Feed-Forward Networks</h2>
+<p>其实就是一个fully connected feed-forward network，他就是一个MLP了，他不一样的是说它是applied to each position seperately and identically ，position就是你输入的那一个序列，每个词就是一个点，那就是一个position，然后他就是把一个MLP对每一个词作用一次，然后对每个词作用的是同样一个MLP，所以这个就是point wise的意思，说白了就是MLP只是作用在最后一个维度</p>
+<img src="http://img.peterli.club/joy/202210141055321.png" alt="position-1" style="zoom:50%;" />
+<p>在注意力层每一个query对应的那一个输出就是长为512，那就是说这个$x$是一个512的一个向量，它说$W_1$会把512投影成2048，这个维度就等于是我把它的维度扩大了四倍，因为最后你有一个残差连接，你还得投影回去，所以$W_2$又把2048投影回了512</p>
+<p>说白了上面那个就是一个单隐藏层的MLP，然后中间隐藏层把你的输入扩大四倍，最后输出的时候也回到你输入的大小，用pytorch来实现的话，其实就是把两个线性层放在一起，你都不需要改任何参数，因为pytorch去当你的输入是一个3D的时候，它默认就是在最后一个维度做计算</p>
+<ul>
+<li>
+<p>与RNN做对比</p>
+<p>考虑最简单的情况，没有残差连接也没有layernorm，attention也是单头然后没有投影</p>
+<p>attention的作用是把整个序列里面的信息抓取出来，做一次汇聚，感兴趣的东西已经抓取出来了，以至于在做投影在做MLP的时候，映射成我想要的那个语义空间的时候，因为已经含有序列信息，所以每个MLP只要在对每个点独立做就行了</p>
+<p>这就是整个Transformer是如何抽取序列信息，然后把这些信息加工成我最后要的那个语义空间那个向量的过程</p>
+<p>对于第一个点，说白了也是做一个线性层，没有隐藏层的MLP就是一个纯线性的层，第一个点就是直接做出去就完事了，我还是用之前这个MLP它的权重跟之前是一样的，但是我的时序信息用绿色表示，他就是把这个东西它的上一个时刻的输出放回来，作为跟输入一起并入进去，这样子就完成了我信息的一个传递，然后用绿色的线表示的是之前的信息，蓝色的线表示的是当前的信息，这样子会得到一个当前的一个输出，历史信息就是上一次的那个输出作为历史信息进来，然后得到我当前的一个输出</p>
+<p>RNN是跟Transformer是一样的，都是用一个线性层或者说一个MLP来做一个语义空间的一个转换，但是不一样的是你如何传递序列的信息</p>
+<p>RNN是把上一个时刻的信息输出传入下一个时刻做输入，但是在Transformer里面它是通过一个attention层然后再全局的去拉到整个序列里面信息，然后用MLP做语义的转换</p>
+<p>这就是两者的区别，但是他们的关注点都是在你怎么有效的去使用你的序列的信息</p>
+<img src="http://img.peterli.club/joy/202210141117036.png" alt="position-2" style="zoom: 33%;" />
+</li>
+</ul>
+<img src="http://img.peterli.club/joy/202210141118537.png" alt="position-3" style="zoom:50%;" />
+<h2 id="Embeddings-and-softmax">Embeddings and softmax</h2>
+<p>输入是一个个的词或者一个叫词源叫token，那我需要把它映射成一个向量，embedding就是说给任何一个词，我学习一个长为d的一个向量来表示它，这个$d_{model}$可以认为是等于512了</p>
+<p>这里是说你的编码器要一个embedding，你的解码器输入也要一个embedding，在softmax前面那个线性也需要一个embedding，他说我这三个是一样的权重，这样子我训练起来会简单一点</p>
+<p>另外一个有意思的是说他把权重乘了一个根号$\sqrt{d_{model}}$，做这个事情是因为你在学embedding的时候，多多少少会把每一个向量它的L2 Norm学成比较小的，比如说学成1，就不管你的维度多大最后你的值都会等于1，也就是说你的维度一大呢，你学的一些权重值就会变小</p>
+<p>如果加上了Positional Encoding，他不会随着你的长度变成了他把你的Norm固定住，所以乘了$\sqrt{d_{model}}$之后，使得他们两个相加的时候在一个scale上大家都差不多，就是它做了一个hat</p>
+<img src="http://img.peterli.club/joy/202210141118127.png" alt="embedding" style="zoom:50%;" />
+<h2 id="Positional-Encoding">Positional Encoding</h2>
+<p>为什么要有这个东西，因为attention这个东西是不会有时序信息的，你的输出是你的value的一个加权和，你这个权重是query和key之间的那个距离，他跟你的序列信息是无关的，就我根本就不会去看你那个key value里面那些对在序列里面哪个地方</p>
+<p>意味着说我给你一句话，我把顺序任何打乱之后，我attention出来结果都是一样的，顺序会变，但是值不会变，但是这个会有问题的，所以需要加时序信息</p>
+<p>它的做法是说在我的输入里面加入时序信息，就是说你这一个词，他在一个位置i，i这个位置这个数字(12345)加到你的输入里面，所以这个东西叫做positional encoding ，有公式计算提供</p>
+<p>其中pos是位置，i是维度。也就是说，位置编码的每个维度对应于一个正弦波。波长形成一个从2$\pi$到10000*2$\pi$的几何级数。我们选择这个函数是因为我们假设它可以让模型很容易地学会通过相对位置来参加，因为对于任何固定的偏移量$k$，$PE_{pos+k}$可以表示为$PE_{pos}$的线性函数</p>
+<p>我们还试验了使用学习的位置嵌入来代替，并发现两个版本产生了几乎相同的结果（见表3行(E)）。我们选择了正弦波版本，因为它可能允许模型推断出比训练期间遇到的序列长度更长的序列</p>
+<img src="http://img.peterli.club/joy/202210141118413.png" alt="encoding-1" style="zoom:50%;" />
+<img src="http://img.peterli.club/joy/202210141118587.png" alt="encoding-2" style="zoom:50%;" />
+<h1>Why self-attention？</h1>
+<p>解释了一个表</p>
+<img src="http://img.peterli.club/joy/202210141118604.png" alt="attention-1" style="zoom:50%;" />
+<p>横坐标：Self-Attention、Recurrent、Convolutional、Self-Attention(restricted)</p>
+<p>纵坐标：Complexity per Layer(每层的计算复杂度)、Sequential Operations(顺序操作)、Maximum Path Length(最大路径长度)</p>
+<ul>
+<li>第一列是说我的计算复杂度当然是越低越好</li>
+<li>第二列是说我的顺序的计算越少越好，顺序的计算就是说你下一步计算必须要等前面多少步计算完成，在算一个Layer的时候，你越不要等那么你的并行度就越高</li>
+<li>第三列是说一个信息从一个数据点走到另一个数据点要走多远，这也是越短越好。</li>
+</ul>
+<p>看一下每一个层它代表的数值是什么意思。</p>
+<ul>
+<li>
+<p>Self-Attention(自注意力层)</p>
+<ul>
+<li>
+<p>Complexity per Layer</p>
+<p>n这个地方是你序列的长度，d是你向量的长度，整个自注意力说白了就是几个矩阵做运算，其中一个矩阵是query矩阵乘以key矩阵，n行n个query，d列维度是d，k也是一样的，两个矩阵一乘，算法复杂度就是n的平方乘以d</p>
+</li>
+<li>
+<p>Sequential Operations</p>
+<p>因为你就是那么几个矩阵乘法，矩阵里面它可以认为是并行度比较高的，所以是O(1)</p>
+</li>
+<li>
+<p>Maximum Path Length</p>
+<p>你从一个点的信息想跳到另外一个点要走多少步，在attention里面就是一个query可以跟所有的key去做运算，输出是value加权和，就是说query跟任何一个很远的一个key value pair，我只要一次就能过来，所以这个长度是比较短的</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Recurrent(循环层)</p>
+<ul>
+<li>
+<p>Complexity per Layer</p>
+<p>如果你的序列是乘了n的话，他就一个一个做运算，每个里面它的主要的计算就是一个n乘以n的一个矩阵，就是一个dense layer，然后再乘以一个长为d的一个输入，所以是d的平方，然后要做n次，所以复杂度是n乘以d的平方</p>
+</li>
+<li>
+<p>Sequential Operations</p>
+<p>在循环的时候，因为你是要一步一步做运算，当前时间刻的那个词需要等待前面那个东西完成，所以导致你是一个成为n的一个序列化的操作，在并行上是比较吃亏的</p>
+</li>
+<li>
+<p>Maximum Path Length</p>
+<p>你最初点的那个历史信息需要到最后那一个点的话，需要走过n步才能过去，所以这个地方最长是O(n)</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Convolutional(卷积)</p>
+<ul>
+<li>
+<p>Complexity per Layer</p>
+<p>没有特别解释卷积在序列上怎么做</p>
+<p>具体做法是他用一个ed的卷积，所以它的kernel就是个k，n是你的长度，d就是你的输入通道数和输出通道数，k一般不大可以认为是常数。所以跟RNN的复杂度是差不多的</p>
+</li>
+<li>
+<p>Sequential Operations</p>
+<p>卷积操作里面的并行度很高，做起来通常比RNN要快一点</p>
+</li>
+<li>
+<p>Maximum Path Length</p>
+<p>卷积每一次一个点是有一个长为k的一个窗口来看，所以它一次一个信息在k距离内是能够一次就能传递，如果超过k的话，要传递信息就要通过多层一层一层上去</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Self-Attention(restricted)受限的自注意力</p>
+<p>当我做注意力的时候，我的query只跟我最近的r个邻居去做运算，这样子就不用去算n平方这个东西，但是这个问题就是，这样子的话有两个比较长的远的一个点需要走几步才能过来</p>
+<p>self-attention主要关心说的是特别长的序列，你真的能够把整个信息揉的比较好一点，所以这个受限的用的不是很多，大家都是用最原始的版本，不用太做受限</p>
+</li>
+</ul>
+<img src="http://img.peterli.club/joy/202210141119639.png" alt="attention-2" style="zoom:50%;" />
+<img src="http://img.peterli.club/joy/202210141119810.png" alt="attention-3" style="zoom: 50%;" />
+<h1>Training</h1>
+<p>讲训练的一些设置</p>
+<h2 id="Training-Data-and-Batching">Training Data and Batching</h2>
+<p>我的训练数据集和我的batching怎么做的，数据集一个是英语翻德语，用的是标准的WMT 2014的数据，它这个里面有4.5万个句子的对，用的是byte-pair encoding，就是bpe</p>
+<p>大概思想是说，你不管是英语还是德语，其实一个词里面有很多种变化，但是你如果直接把每一个词做成一个token的话，你会导致你的字典里面的东西会比较多，而且一个动词的可能有几种变化形式，你做成不一样的词的时候，他们之间的区别模型是不知道了，bpe相对来说就是把你那些词根跟你提出来，这样好处是说它可以把整个字典这样的比较小</p>
+<p>这里用的是37000个token的一个字典，而且他是在英语和德语之间是共享的，就是说我们不再为英语构造一个字典，不再为德语构造一个字典，这样的好处是说，我整个编码器和解码器的一个embedding就可以用一个东西了，而且整个模型变得更加简单，编码器解码器那个embedding它是共享权重的</p>
+<p>另一个是英语翻法语的话，他用了一个更大的一个数据集</p>
+<h2 id="Hardware-and-Schedule">Hardware and Schedule</h2>
+<p>训练使用了八个P100的GPU，base模型是用的一个小一点的参数，他每一个batch训练的时间是0.4秒，然后一共训练了10万步，一共就是在8个GPU上训练了12个小时，一个大的模型，这样的一个batch训练需要一秒钟，然后一共训练了30万步，最后是一台机器3.5天</p>
+<h2 id="Optimizer">Optimizer</h2>
+<p>使用的是Adam，图下是他的参数，学习率是图下公式算出来的，它的学习率是根据你的模型那个宽度的-0.5次方，当你的模型越宽的时候，你学的那些向量越长的时候，你的学习率要低一点，另一个它是有warmup，就是从一个小的值慢慢地爬到了一个高的值，爬到之后再根据你的步数按照0.5次方衰减，最后他说我的warmup是4000</p>
+<p>这里基本没有东西可以调，就是你的学习率几乎是不用调的，取决于第一adam对学习率确实不那么敏感，第二是说他这个地方也是把整个就两个模型这个东西已经考虑进来了，这个schedule也算是不错的schedule了，所以在学习率是不需要调的</p>
+<img src="http://img.peterli.club/joy/202210141119601.png" alt="optimizer-1" style="zoom:50%;" />
+<img src="http://img.peterli.club/joy/202210141119799.png" alt="optimizer-2" style="zoom:50%;" />
+<h2 id="Regularization">Regularization</h2>
+<p>用了三个正则化</p>
+<ul>
+<li>
+<p>Residual Dropout</p>
+<p>说白了就是说对每一个子层，子层就是包括了你的多头的注意力层和你之后的MLP，在每个层的输出上，在他进入残差连接之前和在进入layernorm之前，它使用了一个dropout，它的dropout率是0.1，也就是说把这些输出的10%的那些元素只乘0.1，剩下的那些只能乘以1.1</p>
+<p>另外一个他在输入加上你的词嵌入，再加上你的positional encoding的时候，在他上面也用了一个dropout，也就是把10%的元素值乘了一个0.1，有意思的是说你基本看到对每一个带权重的乘，他在输出上都使用的dropout，虽然dropout率并不是特别高，但是它使用了大量的dropout层，来对它的模型做正则化</p>
+</li>
+<li>
+<p>Label Smoothing</p>
+<p>这个技术是在inception net v3中让大家知道的，意思是说我们用softmax去学一个东西的时候，我的标号是正确的是1，错误的是0，对于正确的那一个label的softmax的值去逼近于1，但是我们知道softmax是很难逼近于1的，因为它里面是一个指数，它是一个很soft的一个东西，就是说它需要你的输出接近无限大的时候才能逼近于1，这个使得训练比较难</p>
+<p>一般的做法是说你不要让搞成那么特别难的0和1，你可以把1的值往下降点，但是这个地方降得比较狠，是降成了0.1，就是说对于正确的那个词，我只需要我的softmax的输出是到0.1就行了，叫置信度是0.1就行了，不需要做的很高，剩下的那些值就可以是0.9除以你的字典的大小</p>
+<p>他说这里会损失你的perplexity，log lost做指数，基本上可以认为是你的模型不确信度，因为你这个地方让你学说我正确答案，我也只要给个10%是对的就行了，所以当然你的不确信度会增加，你这个值会变高，但是他说我的模型会不那么确信，会提升我的精度和我的BLEU分数，因为精度和bleu的分数才是我们关心的重点</p>
+</li>
+<li>
+<p>不同的超参数之间的一些对比</p>
+<p><img src="http://img.peterli.club/joy/202210141119647.png" alt="regular-1"></p>
+<p>N是堆了多少层</p>
+<p>$d_{model}$是你这个模型的宽度，就是一个token进来要表示成一个多长的向量</p>
+<p>$d_{ff}$表示的是你拿MLP中间那个隐藏层的输出的大小</p>
+<p>h是你的头的个数就是你注意力层的头的个数</p>
+<p>$d_k$、$d_v$分别是你一个头里面那个key和value的维度</p>
+<p>$P_{drop}$是你dropout是你的丢弃的率</p>
+<p>$E_{ls}$是说你最后label smoothing的时候，你这个要学的那个label的真实值是等于多少，train steps是说你要训练多少个batch</p>
+<p>看一下base模型，他用了六个层，每一层的宽度是512，$d_{ff}$是它的4倍，头的数($h$)乘以你的维度数($d_k$)是等于$d_{model}$，$P_{drop}$=0.1，$E_{ls}$=0.1</p>
+<p>看一下big模型，基本上可以看到是说，层数没有变，但是模型的宽度乘了两倍，$d_{ff}$自然就翻了倍，头的个数乘了两倍，另外一个模型变得更加复杂，所以他用了一个比较大的丢弃率0.3，而且模型更加复杂了收敛会慢一点，因为你的学习率是变低了的，这个地方训练了30万个批量大小</p>
+<p>所以可以看到整个模型参数相对来说还是比较简单的，模型层数、宽度、有多少个头，剩下的这些东西基本上都是可以按比例算过来的，这也是Transformer架构的一个好处，虽然模型比较复杂，但是也没有太多东西可以调，这个设计上来说让后面的人更加方便一点</p>
+<p>bert其实就是把这个架构拉过去，然后把几个参数改了一下，GPT也是这样的</p>
+</li>
+</ul>
+<img src="http://img.peterli.club/joy/202210141119896.png" alt="training-1" style="zoom:50%;" />
+<img src="http://img.peterli.club/joy/202210141120317.png" alt="training-2" style="zoom:50%;" />
+<h1>Results</h1>
+<h2 id="Machine-Translation">Machine Translation</h2>
+<img src="http://img.peterli.club/joy/202210141120776.png" alt="translation-1" style="zoom:50%;" />
+<h2 id="Model-Variations">Model Variations</h2>
+<img src="http://img.peterli.club/joy/202210141120215.png" alt="variation-1" style="zoom:50%;" />
+<h2 id="English-Constituency-Parsing">English Constituency Parsing</h2>
+<img src="http://img.peterli.club/joy/202210141120838.png" alt="parsing-1" style="zoom:50%;" />
+<img src="http://img.peterli.club/joy/202210141120740.png" alt="parsing-2" style="zoom:50%;" />
+<h1>评论</h1>
+<ul>
+<li>
+<p>写作</p>
+<p>这篇文章的写作是非常简洁的，因为他每一句话就基本上在讲一件事情</p>
+<p>另一个是说没有用太多的写作技巧，基本上就是说你看我提出一个什么东西，这个模型长什么样子，跟CNN和RNN比是什么样子，最后的结论是什么，最后的实验结果是什么东西，这个写法不推荐，因为对一篇文章来说，你需要在讲一个故事，让你的读者有代入感</p>
+<p>但是你要在一篇文章里面发现那么多东西的话，也没那么多篇幅来讲一个很好的故事</p>
+<blockquote>
+<p>经验：假设你写篇文章的话，你可以选择把你的东西减少一点，甚至把一些东西，不那么重要的东西放到你的附录里面，但是在正文的时候，你还是最好讲个故事，说你为什么做这个事情，你的一些设计的理念是什么样子的，你对整个文字的一些思考是什么样子的，这个东西让大家会觉得你的文章更加有深度一些</p>
+</blockquote>
+</li>
+<li>
+<p>Transformer这个模型本身</p>
+<p>我们现在当然可以看到Transformer模型不仅仅是用在机器翻译上面，它也能够用在几乎所有的NLP的任务上面，在后续的工作，BERT、GPT，让大家能够训练很大的易训的模型，能够极大的提升所有NLP里面的任务的性能，这个有点像CNN在对整个计算机视觉的改变，我们能够训练一个大的CNN的模型，使得别的人物也能够从中受益</p>
+<p>另外一个是说，CNN给整个计算机视觉的研究者提供了一个同样的一个框架，使得我只要学会CNN就行了，而不需要去管以前跟任务相关的那么多的专业的知识，比如说做特征提取，对整个任务怎么建模，Transformer之前我们要做各种各样的数据文本的预处理，然后我要根据NLP的任务给你设计不一样的架构，现在不需要了</p>
+<p>我们用整个transformer这个架构就能够在各个任务上做的非常好的成绩，而且他预设的模型也让大家的训练变得更加简单</p>
+</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://joyceliang.club">Joyce</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://joyceliang.club/2022/Transformer/">http://joyceliang.club/2022/Transformer/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://joyceliang.club" target="_blank">梁止潆的博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Transformer/">Transformer</a><a class="post-meta__tags" href="/tags/AI/">AI</a><a class="post-meta__tags" href="/tags/Paper/">Paper</a></div><div class="post_share"><div class="social-share" data-image="http://img.peterli.club/joy/202210181341253.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://unpkg.com/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://unpkg.com/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-full"><a href="/2022/Docker%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93%E6%90%AD%E5%BB%BA/"><img class="prev-cover" src="https://goharbor.io/img/logos/harbor-horizontal-color.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">搭建Docker私有仓库</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/Alphafold2/" title="Alphafold2"><img class="cover" src="http://img.peterli.club/joy/202210182152112.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-10-18</div><div class="title">Alphafold2</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="gitalk-container"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="http://img.peterli.club/joy/202210141514731.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Joyce</div><div class="author-info__description">上海科技大学 | 生物医学工程学院 | 生物信息学</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">43</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/JoyceLiang-sudo"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/JoyceLiang-sudo" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:joy.sudo996@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">不会敲代码也不会分子生物学的生信狗</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">Transformer</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">标题+作者</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Attention-Is-All-You-Need"><span class="toc-number">2.1.</span> <span class="toc-text">Attention Is All You Need</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">摘要(Abstract)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">4.</span> <span class="toc-text">结论(Conclusion)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">5.</span> <span class="toc-text">导言(Introduction)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">6.</span> <span class="toc-text">相关工作(Background)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">7.</span> <span class="toc-text">✨模型架构(Model Architecture)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B7%E4%BD%93%E4%BB%8B%E7%BB%8D"><span class="toc-number">7.1.</span> <span class="toc-text">具体介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Encoder-and-Decoder-Stacks"><span class="toc-number">7.2.</span> <span class="toc-text">Encoder and Decoder Stacks</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Attention"><span class="toc-number">7.3.</span> <span class="toc-text">Attention</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Scaled-Dot-Product-Attention"><span class="toc-number">7.3.1.</span> <span class="toc-text">Scaled Dot-Product Attention</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Multi-Head-Attention"><span class="toc-number">7.3.2.</span> <span class="toc-text">Multi-Head Attention</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Applications-of-Attention-in-our-Model"><span class="toc-number">7.3.3.</span> <span class="toc-text">Applications of Attention in our Model</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Position-wise-Feed-Forward-Networks"><span class="toc-number">7.4.</span> <span class="toc-text">Position-wise Feed-Forward Networks</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Embeddings-and-softmax"><span class="toc-number">7.5.</span> <span class="toc-text">Embeddings and softmax</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Positional-Encoding"><span class="toc-number">7.6.</span> <span class="toc-text">Positional Encoding</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">8.</span> <span class="toc-text">Why self-attention？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">9.</span> <span class="toc-text">Training</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Training-Data-and-Batching"><span class="toc-number">9.1.</span> <span class="toc-text">Training Data and Batching</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hardware-and-Schedule"><span class="toc-number">9.2.</span> <span class="toc-text">Hardware and Schedule</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Optimizer"><span class="toc-number">9.3.</span> <span class="toc-text">Optimizer</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Regularization"><span class="toc-number">9.4.</span> <span class="toc-text">Regularization</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">10.</span> <span class="toc-text">Results</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Machine-Translation"><span class="toc-number">10.1.</span> <span class="toc-text">Machine Translation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Model-Variations"><span class="toc-number">10.2.</span> <span class="toc-text">Model Variations</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#English-Constituency-Parsing"><span class="toc-number">10.3.</span> <span class="toc-text">English Constituency Parsing</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">11.</span> <span class="toc-text">评论</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/2-10-Dedicated-database-KEGG-OMIM/" title="2.10 Dedicated database KEGG, OMIM"><img src="http://img.peterli.club/joy/202210211052313.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="2.10 Dedicated database KEGG, OMIM"/></a><div class="content"><a class="title" href="/2022/2-10-Dedicated-database-KEGG-OMIM/" title="2.10 Dedicated database KEGG, OMIM">2.10 Dedicated database KEGG, OMIM</a><time datetime="2022-10-21T02:51:47.000Z" title="发表于 2022-10-21 10:51:47">2022-10-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/2-9-Secondary-Protein-Database/" title="2.9 Secondary Protein Database"><img src="http://img.peterli.club/joy/202210211034685.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="2.9 Secondary Protein Database"/></a><div class="content"><a class="title" href="/2022/2-9-Secondary-Protein-Database/" title="2.9 Secondary Protein Database">2.9 Secondary Protein Database</a><time datetime="2022-10-21T02:32:39.000Z" title="发表于 2022-10-21 10:32:39">2022-10-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/2-8-Primary-Protein-Structure-Database-PDB/" title="2.8 Primary Protein Structure Database PDB"><img src="http://img.peterli.club/joy/202210211024487.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="2.8 Primary Protein Structure Database PDB"/></a><div class="content"><a class="title" href="/2022/2-8-Primary-Protein-Structure-Database-PDB/" title="2.8 Primary Protein Structure Database PDB">2.8 Primary Protein Structure Database PDB</a><time datetime="2022-10-21T02:22:30.000Z" title="发表于 2022-10-21 10:22:30">2022-10-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/2-7-Primary-Protein-Sequence-Database-UniProt/" title="2.7 Primary Protein Sequence Database UniProt"><img src="http://img.peterli.club/joy/202210211008928.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="2.7 Primary Protein Sequence Database UniProt"/></a><div class="content"><a class="title" href="/2022/2-7-Primary-Protein-Sequence-Database-UniProt/" title="2.7 Primary Protein Sequence Database UniProt">2.7 Primary Protein Sequence Database UniProt</a><time datetime="2022-10-21T02:07:31.000Z" title="发表于 2022-10-21 10:07:31">2022-10-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/2-6-Secondary-Nucleic-Acid-Database/" title="2.6 Secondary Nucleic Acid Database"><img src="http://img.peterli.club/joy/202210210953987.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="2.6 Secondary Nucleic Acid Database"/></a><div class="content"><a class="title" href="/2022/2-6-Secondary-Nucleic-Acid-Database/" title="2.6 Secondary Nucleic Acid Database">2.6 Secondary Nucleic Acid Database</a><time datetime="2022-10-21T01:53:02.000Z" title="发表于 2022-10-21 09:53:02">2022-10-21</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2022 By Joyce</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text"><a target="_blank" rel="noopener" href="http://www.beian.miit.gov.cn/"><img class="icp-icon" src="http://www.beian.gov.cn/img/new/gongan.png"><span>鲁ICP备19056758号-1</span></a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://unpkg.com/@fancyapps/ui/dist/fancybox.umd.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.2
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        insertScript: [200, () => {
+          document.querySelectorAll('mjx-container:not\([display]\)').forEach(node => {
+            const target = node.parentNode
+            if (target.nodeName.toLowerCase() === 'li') {
+              target.parentNode.classList.add('has-jax')
+            } else {
+              target.classList.add('has-jax')
+            }
+          });
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://unpkg.com/mathjax/es5/tex-mml-chtml.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script><script>function addGitalkSource () {
+  const ele = document.createElement('link')
+  ele.rel = 'stylesheet'
+  ele.href= 'https://unpkg.com/gitalk/dist/gitalk.css'
+  document.getElementsByTagName('head')[0].appendChild(ele)
+}
+
+function loadGitalk () {
+  function initGitalk () {
+    var gitalk = new Gitalk(Object.assign({
+      clientID: '724b7aa968ee8ea82914',
+      clientSecret: '416b14a2294b82ce2040ee2e44c2af9c74ef4851',
+      repo: 'JoyceLiang-sudo.github.io',
+      owner: 'JoyceLiang-sudo',
+      admin: ['JoyceLiang-sudo'],
+      id: '8959eef4c869b06c474a2cb3d28e6963',
+      updateCountCallback: commentCount
+    },null))
+
+    gitalk.render('gitalk-container')
+  }
+
+  if (typeof Gitalk === 'function') initGitalk()
+  else {
+    addGitalkSource()
+    getScript('https://unpkg.com/gitalk/dist/gitalk.min.js').then(initGitalk)
+  }
+}
+
+function commentCount(n){
+  let isCommentCount = document.querySelector('#post-meta .gitalk-comment-count')
+  if (isCommentCount) {
+    isCommentCount.innerHTML= n
+  }
+}
+
+if ('Gitalk' === 'Gitalk' || !false) {
+  if (false) btf.loadComment(document.getElementById('gitalk-container'), loadGitalk)
+  else loadGitalk()
+} else {
+  function loadOtherComment () {
+    loadGitalk()
+  }
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

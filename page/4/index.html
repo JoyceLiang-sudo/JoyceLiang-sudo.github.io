@@ -1,0 +1,519 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>梁止潆的博客 - 学习记录</title><meta name="keywords" content="ML,BIOINFORMATICS"><meta name="author" content="Joyce"><meta name="copyright" content="Joyce"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="上海科技大学 | 生物医学工程学院 | 生物信息学">
+<meta property="og:type" content="website">
+<meta property="og:title" content="梁止潆的博客">
+<meta property="og:url" content="http://joyceliang.club/page/4/index.html">
+<meta property="og:site_name" content="梁止潆的博客">
+<meta property="og:description" content="上海科技大学 | 生物医学工程学院 | 生物信息学">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://img.peterli.club/joy/202210141514731.jpeg">
+<meta property="article:author" content="Joyce">
+<meta property="article:tag" content="ML,BIOINFORMATICS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://img.peterli.club/joy/202210141514731.jpeg"><link rel="shortcut icon" href="http://img.peterli.club/joy/202210141514731.jpeg"><link rel="canonical" href="http://joyceliang.club/page/4/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="baidu-site-verification" content="code-c9hz390Wld"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://unpkg.com/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?e50dee5804918429b74a301c425729fe";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.json","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://unpkg.com/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://unpkg.com/flickr-justified-gallery/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '梁止潆的博客',
+  isPost: false,
+  isHome: true,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2022-11-16 09:49:36'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="http://img.peterli.club/joy/202210141514731.jpeg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">43</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/paper/"><i class="fa-fw fas fa-duotone fa-newspaper"></i><span> Paper</span></a></li><li><a class="site-page child" href="/bioinformatics/"><i class="fa-fw fas fa-regular fa-dna"></i><span> BioInformatics</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url('http://img.peterli.club/joy/202210141549865.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">梁止潆的博客</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/paper/"><i class="fa-fw fas fa-duotone fa-newspaper"></i><span> Paper</span></a></li><li><a class="site-page child" href="/bioinformatics/"><i class="fa-fw fas fa-regular fa-dna"></i><span> BioInformatics</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">梁止潆的博客</h1><div id="site-subtitle"><span id="subtitle"></span></div><div id="site_social_icons"><a class="social-icon" href="https://github.com/JoyceLiang-sudo" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:joy.sudo996@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="post_cover left"><a href="/2022/3-2-Hidden-Markov-Model/" title="3.2 Hidden Markov Model"><img class="post_bg" src="http://img.peterli.club/joy/202210191552265.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="3.2 Hidden Markov Model"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/3-2-Hidden-Markov-Model/" title="3.2 Hidden Markov Model">3.2 Hidden Markov Model</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-10-19T08:11:46.000Z" title="发表于 2022-10-19 16:11:46">2022-10-19</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Learning-Note/">Learning Note</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/Learning-Note/BioInformatics/">BioInformatics</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/Learning-Note/BioInformatics/PKUBioInformatics/">PKUBioInformatics</a></span></div><div class="content">3.2 隐马尔可夫模型(Hidden Markov Model)
+引言
+之前
+
+存在的问题：仅靠👆还不足以真正完成序列比对，因为现有的状态模型只是区分了空位状态X Y M，而没有考虑具体的残基
+
+解决
+隐马尔可夫模型(Hidden Markov Model HMM)
+
+
+The observable symbols (“tokens”, y(t)) are generated according to their corresponding states (x(t))
+可观察的符号（“tokens”，y(t)）是根据其相应的状态（x(t)）生成
+在状态的基础上增加了符号的概念
+
+
+
+In addition to State Transition Probability, each state of HMM has a probability distribution over the possible output tokens(Emission Probability).
+除了状态转移概率外，HMM的每个状态都有一个关于可能的输出标记的概率分布（生成概率）
+除了状态转移概率之外，隐 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2022/3-1-From-States-to-Markov-Chains/" title="3.1 From States to Markov Chains"><img class="post_bg" src="http://img.peterli.club/joy/202210191552265.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="3.1 From States to Markov Chains"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/3-1-From-States-to-Markov-Chains/" title="3.1 From States to Markov Chains">3.1 From States to Markov Chains</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-10-19T07:49:58.000Z" title="发表于 2022-10-19 15:49:58">2022-10-19</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Learning-Note/">Learning Note</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/Learning-Note/BioInformatics/">BioInformatics</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/Learning-Note/BioInformatics/PKUBioInformatics/">PKUBioInformatics</a></span></div><div class="content">3.1 从状态到马尔可夫链
+马尔可夫链(Markov Chain)
+
+
+A Markov chain describes a discrete stochastic process at successive times. The transitions from one state to all other states, including itself, are governed by a probability distribution
+马尔科夫链描述了一个连续时间的离散随机过程。从一个状态到所有其他状态的转换，包括其本身，都由一个概率分布所支配
+
+
+t时刻状态的概率分布由且仅由前有限个m时刻状态的概率分布来决定
+——M阶马尔可夫链
+
+
+
+A chain of random variables in which the next one depends (only) on the current one
+一条随机变量链，其中下一个随机变量（仅）取决于当前随机变量。
+当前的状态与且只与前一个状态相关 —— 一阶马尔可夫链
+
+转移概率(Transition Probability) ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2022/2-6-BLAST/" title="2.6 BLAST"><img class="post_bg" src="http://img.peterli.club/joy/202210190851497.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="2.6 BLAST"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/2-6-BLAST/" title="2.6 BLAST">2.6 BLAST</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-10-19T05:11:01.000Z" title="发表于 2022-10-19 13:11:01">2022-10-19</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Learning-Note/">Learning Note</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/Learning-Note/BioInformatics/">BioInformatics</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/Learning-Note/BioInformatics/PKUBioInformatics/">PKUBioInformatics</a></span></div><div class="content">2.6 BLAST算法
+
+
+Intro
+
+
+
+Application
+
+
+
+思路 —— BLAST Ideas: Seeding‐and‐extending：种子-扩展
+
+Find matches (seed) between the query and subject；寻找查询序列和目标序列之间的匹配（种子即高度相似的序列片段）
+Extend seed into High Scoring Segment Pairs (HSPs)；将种子扩展成高分段对（HSPs）
+– Run Smith‐Waterman algorithm on the specified region only.特定区域
+Assess the reliability of the alignment.计算统计显著性，评估校准的可靠性
+
+
+
+
+Seeding
+For a given word length w (usually 3 for proteins and 11 for nucleotides), slicing the query sequence into multiple
+对于给定的单词长度w（通常3是 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2022/2-5-Sequence-Database/" title="2.5 Sequence Database"><img class="post_bg" src="http://img.peterli.club/joy/202210190851497.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="2.5 Sequence Database"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/2-5-Sequence-Database/" title="2.5 Sequence Database">2.5 Sequence Database</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-10-19T05:07:22.000Z" title="发表于 2022-10-19 13:07:22">2022-10-19</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Learning-Note/">Learning Note</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/Learning-Note/BioInformatics/">BioInformatics</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/Learning-Note/BioInformatics/PKUBioInformatics/">PKUBioInformatics</a></span></div><div class="content">2.5 序列数据库
+
+
+序列数据库检索
+
+
+原理
+
+
+
+
+Step
+
+
+
+
+
+</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2022/2-4-Supplementary-materials/" title="2.4 Supplementary materials"><img class="post_bg" src="http://img.peterli.club/joy/202210190851497.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="2.4 Supplementary materials"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/2-4-Supplementary-materials/" title="2.4 Supplementary materials">2.4 Supplementary materials</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-10-19T03:47:27.000Z" title="发表于 2022-10-19 11:47:27">2022-10-19</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Learning-Note/">Learning Note</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/Learning-Note/BioInformatics/">BioInformatics</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/Learning-Note/BioInformatics/PKUBioInformatics/">PKUBioInformatics</a></span></div><div class="content">2.4 补充材料 同源、相似性、相似性矩阵、点阵图
+S1: Alignment with Affine Gap Penalty——对于空位罚分的改进
+第一节 罚分：区分 opening和 extending 并对此线性组合
+
+第二三节 罚分：不区分opening 和extending 统一用 d
+
+这一节 分三个状态M、X、Y
+
+将之前的罚分分成了d和e两种，如果是第一个gap，罚分就为d，如果是接着前面的gap后面还是gap，那后面那个gap的罚分就是e，故叫做open gap即开场，叫做extension gap即延续
+
+
+例：
+
+
+第一种
+
+当前的是Xi对比上Yj
+1、如果前一个也是match对比成功，那就是前面的分加上替换矩阵对应的分
+2、如果前一个是Xi对比上空位，那就是用前面X的分加上替换矩阵对应的分
+3、如果前一个是Yj对比上空位，那就是用前面X的分加上替换矩阵对应的分
+最终结果取这三者中的最大值
+
+
+第二种
+
+当前的是Xi对比上空位即gap
+1、如果前一个是match对比成功，那就是当前空位是open gap 开头的gap 即罚分为d
+2、如果前一个是Xi对比上空位，那 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2022/2-3-From-Global-To-Local/" title="2.3 From Global To Local"><img class="post_bg" src="http://img.peterli.club/joy/202210190851497.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="2.3 From Global To Local"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/2-3-From-Global-To-Local/" title="2.3 From Global To Local">2.3 From Global To Local</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-10-19T03:28:34.000Z" title="发表于 2022-10-19 11:28:34">2022-10-19</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Learning-Note/">Learning Note</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/Learning-Note/BioInformatics/">BioInformatics</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/Learning-Note/BioInformatics/PKUBioInformatics/">PKUBioInformatics</a></span></div><div class="content">2.3 从全局比对到局部比对 From Global To Local
+
+
+为什么要局部比对？
+全局比对——对序列的全部残基进行比对
+早期在蛋白质序列比对中有广泛的应用
+后面发现造成的问题：
+
+
+发现功能相关的蛋白质之间，虽然可能在整体序列上相差甚远，却常常会有相同的功能域，这些序列片段能够独立发挥特定的生物学功能，但却在不同蛋白质之间相当保守，仅靠全局比对算法显然是无法发现这些片段的
+
+
+
+70年代内含子的发现，使得在做核酸水平的序列比对时必须要能正确处理内含子导致的大片段的差异
+
+
+
+80年代初，开始认识到要有方法去认识到局部相似的序列，换句话说，我们要做local alignment 局部比对
+
+
+局部比对算法
+
+
+局部比对和全局比对的区别
+
+
+
+每步迭代的时候给分数加入了一个下限
+
+负数都变成了0
+大的值之间的竞争
+
+
+
+
+</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2022/2-2-Global-Comparison-using-Dynamic-Programming/" title="2.2 Global Comparison using Dynamic Programming"><img class="post_bg" src="http://img.peterli.club/joy/202210190851497.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="2.2 Global Comparison using Dynamic Programming"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/2-2-Global-Comparison-using-Dynamic-Programming/" title="2.2 Global Comparison using Dynamic Programming">2.2 Global Comparison using Dynamic Programming</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-10-19T02:15:05.000Z" title="发表于 2022-10-19 10:15:05">2022-10-19</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Learning-Note/">Learning Note</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/Learning-Note/BioInformatics/">BioInformatics</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/Learning-Note/BioInformatics/PKUBioInformatics/">PKUBioInformatics</a></span></div><div class="content">2.2 利用动态规划进行全局比对
+
+
+输入输出
+
+
+
+比对方法
+
+
+穷举法(理论可行，实践难)：
+
+
+
+动态规划法
+
+
+最好的比对 = 之前最好的比对 + 当前最好的比对
+
+
+
+全局最优解 = 局部最优解之和
+
+
+
+Step
+
+
+
+Formula
+
+
+例：
+
+
+
+边边的格子
+
+左方和上方对应的格子 0 + -5 = -5 -5 + -5 = -10 -10 + -5 = -15
+
+
+中间的格子
+
+三个来源：
+1、左方格子 + -5 = -10
+2、上方格子 + -5 = -10
+3、 斜上方格子 + 替换矩阵中的AA对应分数 = 2
+
+取最大值为2 并标出来源指向箭头
+
+
+中间的格子
+
+问：为啥会有两个箭头指向3？
+答：说明有两个来源
+左方格子 + -5 = -3
+上方格子 + -5 = -15
+斜上方格子 + 2 = -3
+
+
+从最后回溯得到最优比对结果
+
+向上向左的箭头对应着空即 ‘-’，斜对角的箭头就对应着表格里的横纵双方
+
+
+
+
+
+
+
+
+</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2022/2-1-Basic-Concepts-in-Sequence-Alignment/" title="2.1 Basic Concepts in Sequence Alignment"><img class="post_bg" src="http://img.peterli.club/joy/202210190851497.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="2.1 Basic Concepts in Sequence Alignment"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/2-1-Basic-Concepts-in-Sequence-Alignment/" title="2.1 Basic Concepts in Sequence Alignment">2.1 Basic Concepts in Sequence Alignment</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-10-19T00:47:29.000Z" title="发表于 2022-10-19 08:47:29">2022-10-19</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Learning-Note/">Learning Note</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/Learning-Note/BioInformatics/">BioInformatics</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/Learning-Note/BioInformatics/PKUBioInformatics/">PKUBioInformatics</a></span></div><div class="content">2.1 序列比对中的基本概念
+引言
+
+正确使用计算机工具的作用
+避免风险
+BDMA
+
+
+2.1.1 序列比对的作用和重要性
+
+
+序列比对的重要性
+
+
+
+序列比对的目的——生物角度
+根据序列之间的功能或演化关系来检测生物之间的相似性
+
+
+
+序列比对工具网站——Pairwise Sequnence Alignment
+
+
+
+Step 1 输入蛋白质序列
+
+
+
+Step 2 设置参数
+
+
+
+Step 3 提交任务
+
+
+
+Step 4 分析结果
+
+
+
+比较两个残基之间的相似程度
+
+💡 ‘｜’ ：相同
+**‘:’：比较相似 **
+**‘.’：一点都不相似 **
+&lt;/aside&gt;
+
+
+衡量标准：替换矩阵
+
+特点：
+
+
+**Symmetry **
+
+得分结果是对称的，跟方向无关
+S ➡️ T 跟 T ➡️ S 的得分是一样的
+
+
+
+Context-insensitive
+
+得分结果与上下文无关
+各个残基之间是独立的
+只与两个残基之间的关系有关
+
+
+
+空位 序列片段插入与删除 对应着罚分
+
+第二个空位 GA ➡️   - - 1个open gap 10’ + 1个extend gap 0 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2022/1-Introduction-and-History/" title="1 Introduction and History"><img class="post_bg" src="http://img.peterli.club/joy/202210190837831.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="1 Introduction and History"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/1-Introduction-and-History/" title="1 Introduction and History">1 Introduction and History</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-10-18T14:42:05.000Z" title="发表于 2022-10-18 22:42:05">2022-10-18</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Learning-Note/">Learning Note</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/Learning-Note/BioInformatics/">BioInformatics</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/Learning-Note/BioInformatics/PKUBioInformatics/">PKUBioInformatics</a></span></div><div class="content">1.1 什么是生物信息学
+引言 生命的奥妙
+
+
+基因组
+
+生命之树
+
+解码基因组
+
+机遇与挑战
+
+定义
+
+
+生物角度
+
+信息角度
+
+
+1.2 生物信息学历史
+
+分子生物学角度
+
+计算机发展角度
+
+生物信息的角度
+
+journals
+
+
+1.3 中国的生物信息学
+
+
+
+
+
+</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2022/PKUBioInformatics/" title="PKUBioInformatics"><img class="post_bg" src="http://img.peterli.club/joy/202210182233477.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="PKUBioInformatics"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/PKUBioInformatics/" title="PKUBioInformatics">PKUBioInformatics</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2022-10-18T14:26:45.000Z" title="发表于 2022-10-18 22:26:45">2022-10-18</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Learning-Note/">Learning Note</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/Learning-Note/BioInformatics/">BioInformatics</a><i class="fas fa-angle-right article-meta-link"></i><a class="article-meta__categories" href="/categories/Learning-Note/BioInformatics/PKUBioInformatics/">PKUBioInformatics</a></span></div><div class="content">PKU BioInformatics
+B站视频：https://www.bilibili.com/video/BV13t411G7oh?p=2&amp;spm_id_from=333.880.my_history.page.click&amp;vd_source=b60872cd374332ccebd93d8a3907fbc7
+
+
+框架图
+
+
+
+第一章 简介
+1 Introduction and History
+
+第二章 序列比对
+2.1 Basic Concepts in Sequence Alignment
+2.2 Global Comparison using Dynamic Programming
+2.3 From Global To Local
+2.4 Supplementary materials
+2.5 Sequence Database
+2.6 BLAST
+
+第三章 HMM预测
+3.1 From States to Markov Chains
+3.2 Hidden Markov Model
+3.3 Predict with Hidden Markov Model
+
+第四 ...</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/3/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/#content-inner">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/#content-inner">5</a><a class="extend next" rel="next" href="/page/5/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="http://img.peterli.club/joy/202210141514731.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Joyce</div><div class="author-info__description">上海科技大学 | 生物医学工程学院 | 生物信息学</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">43</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/JoyceLiang-sudo"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/JoyceLiang-sudo" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:joy.sudo996@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">不会敲代码也不会分子生物学的生信狗</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/2-10-Dedicated-database-KEGG-OMIM/" title="2.10 Dedicated database KEGG, OMIM"><img src="http://img.peterli.club/joy/202210211052313.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="2.10 Dedicated database KEGG, OMIM"/></a><div class="content"><a class="title" href="/2022/2-10-Dedicated-database-KEGG-OMIM/" title="2.10 Dedicated database KEGG, OMIM">2.10 Dedicated database KEGG, OMIM</a><time datetime="2022-10-21T02:51:47.000Z" title="发表于 2022-10-21 10:51:47">2022-10-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/2-9-Secondary-Protein-Database/" title="2.9 Secondary Protein Database"><img src="http://img.peterli.club/joy/202210211034685.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="2.9 Secondary Protein Database"/></a><div class="content"><a class="title" href="/2022/2-9-Secondary-Protein-Database/" title="2.9 Secondary Protein Database">2.9 Secondary Protein Database</a><time datetime="2022-10-21T02:32:39.000Z" title="发表于 2022-10-21 10:32:39">2022-10-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/2-8-Primary-Protein-Structure-Database-PDB/" title="2.8 Primary Protein Structure Database PDB"><img src="http://img.peterli.club/joy/202210211024487.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="2.8 Primary Protein Structure Database PDB"/></a><div class="content"><a class="title" href="/2022/2-8-Primary-Protein-Structure-Database-PDB/" title="2.8 Primary Protein Structure Database PDB">2.8 Primary Protein Structure Database PDB</a><time datetime="2022-10-21T02:22:30.000Z" title="发表于 2022-10-21 10:22:30">2022-10-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/2-7-Primary-Protein-Sequence-Database-UniProt/" title="2.7 Primary Protein Sequence Database UniProt"><img src="http://img.peterli.club/joy/202210211008928.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="2.7 Primary Protein Sequence Database UniProt"/></a><div class="content"><a class="title" href="/2022/2-7-Primary-Protein-Sequence-Database-UniProt/" title="2.7 Primary Protein Sequence Database UniProt">2.7 Primary Protein Sequence Database UniProt</a><time datetime="2022-10-21T02:07:31.000Z" title="发表于 2022-10-21 10:07:31">2022-10-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/2-6-Secondary-Nucleic-Acid-Database/" title="2.6 Secondary Nucleic Acid Database"><img src="http://img.peterli.club/joy/202210210953987.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="2.6 Secondary Nucleic Acid Database"/></a><div class="content"><a class="title" href="/2022/2-6-Secondary-Nucleic-Acid-Database/" title="2.6 Secondary Nucleic Acid Database">2.6 Secondary Nucleic Acid Database</a><time datetime="2022-10-21T01:53:02.000Z" title="发表于 2022-10-21 09:53:02">2022-10-21</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>分类</span>
+            <a class="card-more-btn" href="/categories/" title="查看更多">
+    <i class="fas fa-angle-right"></i></a>
+            </div>
+            <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Docker/"><span class="card-category-list-name">Docker</span><span class="card-category-list-count">1</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Docker/DockerHub/"><span class="card-category-list-name">DockerHub</span><span class="card-category-list-count">1</span></a></li></ul></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Learning-Note/"><span class="card-category-list-name">Learning Note</span><span class="card-category-list-count">40</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Learning-Note/BioInformatics/"><span class="card-category-list-name">BioInformatics</span><span class="card-category-list-count">40</span></a><ul class="card-category-list child"><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Learning-Note/BioInformatics/Molecular-Biology/"><span class="card-category-list-name">Molecular Biology</span><span class="card-category-list-count">12</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Learning-Note/BioInformatics/PKUBioInformatics/"><span class="card-category-list-name">PKUBioInformatics</span><span class="card-category-list-count">15</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Learning-Note/BioInformatics/SDUBioInformatics/"><span class="card-category-list-name">SDUBioInformatics</span><span class="card-category-list-count">13</span></a></li></ul></li></ul></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Paper/"><span class="card-category-list-name">Paper</span><span class="card-category-list-count">2</span></a></li>
+            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/AI/" style="font-size: 1.23em; color: #999ea6">AI</a> <a href="/tags/BioInformatics/" style="font-size: 1.5em; color: #99a9bf">BioInformatics</a> <a href="/tags/Docker/" style="font-size: 1.1em; color: #999">Docker</a> <a href="/tags/DockerHub/" style="font-size: 1.1em; color: #999">DockerHub</a> <a href="/tags/Learning-Note/" style="font-size: 1.5em; color: #99a9bf">Learning Note</a> <a href="/tags/Molecular-Biology/" style="font-size: 1.37em; color: #99a4b2">Molecular Biology</a> <a href="/tags/Paper/" style="font-size: 1.23em; color: #999ea6">Paper</a> <a href="/tags/Transformer/" style="font-size: 1.23em; color: #999ea6">Transformer</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/10/"><span class="card-archive-list-date">2022年10月</span><span class="card-archive-list-count">43</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">43</div></div><div class="webinfo-item"><div class="item-name">已运行时间 :</div><div class="item-count" id="runtimeshow" data-publishDate="2019-06-06T16:00:00.000Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总访问量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2022-11-16T01:49:36.197Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2022 By Joyce</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text"><a target="_blank" rel="noopener" href="http://www.beian.miit.gov.cn/"><img class="icp-icon" src="http://www.beian.gov.cn/img/new/gongan.png"><span>鲁ICP备19056758号-1</span></a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://unpkg.com/@fancyapps/ui/dist/fancybox.umd.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function subtitleType () {
+  if (true) { 
+    window.typed = new Typed("#subtitle", {
+      strings: ["除了吃饭睡觉羊了个羊就是上班！","立志活着！"],
+      startDelay: 300,
+      typeSpeed: 150,
+      loop: true,
+      backSpeed: 50
+    })
+  } else {
+    document.getElementById("subtitle").innerHTML = '除了吃饭睡觉羊了个羊就是上班！'
+  }
+}
+
+if (true) {
+  if (typeof Typed === 'function') {
+    subtitleType()
+  } else {
+    getScript('https://unpkg.com/typed.js/lib/typed.min.js').then(subtitleType)
+  }
+} else {
+  subtitleType()
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
